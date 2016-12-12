@@ -4,12 +4,15 @@ registers = {
     'c': 1,
     'd': 0
 }
-
 instructions = []
-line = input()
-while line != '':
+lines = open('d12.txt').read().split('\n')
+for line in lines:
     instructions.append(line.split(' '))
-    line = input()
+
+# line = input()
+# while line != '':
+#     instructions.append(line.split(' '))
+#     line = input()
 
 def read(v):
     try:
