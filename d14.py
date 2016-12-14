@@ -8,9 +8,14 @@ def gethash(salt, index):
     m.update(str(index).encode("utf-8"))
     return m.hexdigest()
 
+def hash2016(salt, index):
+    h = gethash(salt, index)
+    for i in range(2016):
+        h = hashlib.md5(h.encode("utf-8")).hexdigest()
+    return h
+
 def five(h, char):
     quintuple = char * 5
-
     for a in h:
         if a.find(quintuple) != -1:
             return True
@@ -20,7 +25,7 @@ def five(h, char):
 
 def solve(salt):
     code = re.compile(r'(.)\1\1')
-    list = [gethash(salt, x) for x in range(1001)]
+    list = [hash2016(salt, x) for x in range(1001)]
 
     index = 0
     num = 0
@@ -32,7 +37,7 @@ def solve(salt):
             if num >= 64:
                 break
         index += 1
-        list.append(gethash(salt, index + len(list)))
+        list.append(hash2016(salt, index + len(list)))
     print(index)
 
 if len(sys.argv) > 1:
