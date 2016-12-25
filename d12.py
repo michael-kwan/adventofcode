@@ -9,11 +9,6 @@ lines = open('d12.txt').read().split('\n')
 for line in lines:
     instructions.append(line.split(' '))
 
-# line = input()
-# while line != '':
-#     instructions.append(line.split(' '))
-#     line = input()
-
 def read(v):
     try:
         return int(v)
